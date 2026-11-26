@@ -64,10 +64,16 @@ button:focus-visible{outline:3px solid #2f7d63;outline-offset:2px}
 .task.warn{background:#ffe9a8}
 .bbot{position:absolute;left:3%;right:3%;bottom:max(2%,env(safe-area-inset-bottom));display:grid;gap:.45em}
 .bmsg{background:#fbf5e6;border-radius:.6em;padding:.4em .8em;margin:0;min-height:2.9em;box-shadow:0 3px 0 rgba(0,0,0,.2)}
-.tools{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.35em;background:#6e4426;padding:.45em;border-radius:.8em;box-shadow:inset 0 4px 0 #57341c}
-.tool{display:flex;flex-direction:column;align-items:center;background:#8e5c37;color:#fff4e2;box-shadow:0 3px 0 #4e2f19;padding:.25em .1em;font-size:max(13px,.78em);transition:transform .12s}
+.tools{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.35em;background:var(--tb,#6e4426);padding:.45em;border-radius:.8em;box-shadow:inset 0 4px 0 var(--tbs,#57341c)}
+.tool{display:flex;flex-direction:column;align-items:center;background:var(--tt,#8e5c37);color:#fff4e2;box-shadow:0 3px 0 var(--tts,#4e2f19);padding:.25em .1em;font-size:max(13px,.78em);transition:transform .12s}
 .tool svg{width:100%;height:2.3em}
-@media(max-width:480px){.tools{grid-template-columns:repeat(3,minmax(0,1fr))}.tool{flex-direction:row;justify-content:center;gap:.3em;min-height:44px}.tool svg{width:1.9em;height:1.9em}}
+@media(max-width:480px){.tools{grid-template-columns:repeat(3,minmax(0,1fr))}.tool{flex-direction:row;justify-content:center;gap:.3em;min-height:44px}.tool svg{width:1.9em;height:1.9em}.tools.many{grid-template-columns:repeat(4,minmax(0,1fr))}.tools.many .tool{flex-direction:column;gap:0;font-size:12px;padding:.2em 0}.tools.many .tool svg{width:100%;height:1.6em}}
+.pal{justify-content:center}.pal[hidden]{display:none}
+.sw{display:inline-flex;align-items:center;gap:.4em;padding:.2em .8em .2em .4em}.sw i{width:1.6em;height:1.6em;border-radius:50%;border:2px solid rgba(0,0,0,.2)}.sw svg{width:1.8em;height:1.8em}.sw.on{outline:3px solid #2f7d63;outline-offset:1px;background:#eaf6ee}
+.tabs{display:flex;gap:.35em;margin:.5em 0 .2em}.tabs button{flex:1;padding:.3em .4em}.tabs button.on{background:#2f7d63;color:#fff;box-shadow:0 3px 0 #1f5a3a}
+.pips{font-style:normal;color:#e2a23c;letter-spacing:.1em;font-size:.85em}
+.swc{display:inline-block;width:1.1em;height:1.1em;border-radius:.3em;vertical-align:-.15em;margin-right:.45em;border:2px solid rgba(0,0,0,.15)}
+.mcard h3{margin:.6em 0 0;font-size:1em;color:#2f7d63}
 .tool.on{background:#f6e2b8;color:#2e2520;transform:translateY(-4px)}
 .rots{position:absolute;right:3%;top:30%;display:grid;gap:.5em}
 .rots button{width:3em;height:3em;border-radius:50%;padding:0;display:grid;place-items:center;background:rgba(251,245,230,.95)}

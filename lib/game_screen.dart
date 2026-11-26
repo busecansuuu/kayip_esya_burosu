@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import 'ads.dart';
+import 'reminders.dart';
 
 /// Oyunun kendisi assets/game/index.html içinde, Three.js ile çizilen 3D bir
 /// sahne. Bu ekran onu tam ekran bir WebView içinde çalıştırır ve oyunla
@@ -16,6 +17,8 @@ import 'ads.dart';
 ///                     {"t":"haptic","k":"light"} titreşim (light | heavy)
 ///                     {"t":"ready"}              oyun yüklendi, kaydı iste
 ///                     {"t":"save","d":"..."}     ilerlemeyi kaydet (null: sil)
+///                     {"t":"remind","b":"..."}   hatırlatma bildiriminin metni
+///                     {"t":"notifyAsk"}          bildirim izni iste
 ///   Flutter -> oyun : window.onAdResult(id, true|false)
 ///                     window.onNativeReady(kayıt | null)
 ///                     window.onPause() / window.onResume()
@@ -31,6 +34,7 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
   static const _saveKey = 'oyun_kaydi_v2';
   late final WebViewController _controller;
   final AdService _ads = AdService();
+  final Reminders _reminders = Reminders();
   bool _loaded = false;
 
   @override
@@ -38,6 +42,7 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _ads.preload();
+    _reminders.init();
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0xFF2A1F1A))
@@ -90,6 +95,12 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
           }
         }
         break;
+      case 'remind':
+        if (data['b'] is String) _reminders.body = data['b'] as String;
+        break;
+      case 'notifyAsk':
+        await _reminders.askPermission();
+        break;
       case 'haptic':
         if (data['k'] == 'heavy') {
           await HapticFeedback.mediumImpact();
@@ -103,9 +114,11 @@ class _GameScreenState extends State<GameScreen> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
+      _reminders.cancel();
       _controller.runJavaScript('window.onResume && window.onResume()');
     } else if (state == AppLifecycleState.paused ||
         state == AppLifecycleState.inactive) {
+      if (state == AppLifecycleState.paused) _reminders.schedule();
       _controller.runJavaScript('window.onPause && window.onPause()');
     }
   }

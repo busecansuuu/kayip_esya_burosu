@@ -62,8 +62,20 @@ Oyun `AdBridge` adlı JavaScript kanalına JSON mesajları gönderir:
 | `{"t":"rewarded","id":3}` | Ödüllü reklam göster. Sonuç `window.onAdResult(3, true/false)` ile döner |
 | `{"t":"interstitial"}` | Gün sonunda geçiş reklamı (iki günde bir) |
 | `{"t":"haptic","k":"light"}` | Titreşim (`light` ya da `heavy`) |
+| `{"t":"remind","b":"..."}` | Ertesi günkü hatırlatma bildiriminin metni |
+| `{"t":"notifyAsk"}` | Bildirim izni iste (ilk gün bitince bir kez) |
 
-Uygulama arka plana geçince oyunun saati durur. Android geri tuşu önce açık masayı kapatır, sonra uygulamadan çıkar.
+Uygulama arka plana geçince oyunun saati ve sesi durur, 20 saat sonrası için tek bir hatırlatma bildirimi kurulur (uygulamaya dönünce iptal edilir). Android geri tuşu önce açık masayı kapatır, sonra uygulamadan çıkar.
+
+## Oyundaki sistemler
+
+- **Tamir aletleri:** El, Fırça, Bez, Tutkal, Tornavida, Sıkıştırma; 2. günden itibaren İğne, Boya, Zımpara, Cila, Parça.
+- **Dükkân:** malzeme, 3 seviyeli geliştirmeler ve görünüm (duvar, masa, alet kutusu; bazıları mevsimlik ya da giriş serisi ödülü).
+- **Her gün geri getiren şeyler:** 7 günlük giriş serisi, günlük 3 görev, günlük hediye, hatırlatma bildirimi.
+- **Koleksiyon:** teslim edilen eşyalar albüme girer, raf setleri tamamlanınca ödül verilir. 8 müdavim müşteriyle 4 kalplik dostluk.
+- **Dünya:** kasaba günler geçtikçe büyür (fırın, çiçekçi, saat kulesi, dönme dolap, balon), yağmurlu günlerde pencereden yağmur görünür, mevsime göre kar, yaprak ya da çiçek yağar.
+- **Çeşitlilik:** her 7. gün müze müdürü özel bir antika getirir. Yeni oyunda Zor mod seçilebilir (daha az sabır, daha hızlı saat, 1,5 kat ödül).
+- **Ses:** bütün efektler ve müzik WebAudio ile üretilir, ses dosyası yok. Üstteki hoparlör düğmesi: ses ve müzik → sadece efekt → kapalı.
 
 ## Oyunu değiştirmek
 

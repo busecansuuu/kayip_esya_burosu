@@ -1,0 +1,19 @@
+name: kayip_esya_burosu
+description: "Kayıp Eşya Bürosu: Minik Şehir - eşyaları temizle, tamir et, sahiplerine teslim et."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.8.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  webview_flutter: ^4.13.0
+  google_mobile_ads: ^8.0.0
+  shared_preferences: ^2.3.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/game/

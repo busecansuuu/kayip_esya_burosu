@@ -1,0 +1,9 @@
+.dart_tool/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+oyun_kaynak/node_modules/
+oyun_kaynak/dist/
+.idea/
+*.iml
+.DS_Store
